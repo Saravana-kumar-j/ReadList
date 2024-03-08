@@ -20,29 +20,31 @@
 </body>
 </html>
 <?php
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    
-    if(empty($username)){
-        echo"Please enter a Username.";
-    } elseif(empty($password)){
-        echo"Please enter a Password.";
-    } else {
-        $sql = "SELECT * FROM user WHERE user_name = '$username'";
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
         
-        try{
-            $result = mysqli_query($conn, $sql);
-            if(mysqli_num_rows($result)>0){
-                while($row =mysqli_fetch_assoc($result)){
-                    header("Location: welcome.php?username=" . $username);
-                    exit();
-                };
-            } else {
-                echo"Your Data Doen't exists. Please Register before login.";
+        if(empty($username)){
+            echo"Please enter a Username.";
+        } elseif(empty($password)){
+            echo"Please enter a Password.";
+        } else {
+            $sql = "SELECT * FROM user WHERE user_name = '$username'";
+            
+            try{
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result)>0){
+                    while($row =mysqli_fetch_assoc($result)){
+                        header("Location: welcome.php?username=" . $username);
+                        exit();
+                    };
+                } else {
+                    echo"Your Data Doen't exists. Please <a href='index.php'>Register Here</a> before login.";
+                }
             }
-        }
-        catch(mysqli_sql_exception){
-            echo"Error Occured.";
+            catch(mysqli_sql_exception){
+                echo"Error Occured.";
+            }
         }
     }
     mysqli_close($conn);

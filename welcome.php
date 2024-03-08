@@ -7,9 +7,10 @@
 </head>
 <body>
     <?php
-    $username = $_GET['username'];
-
-    echo "<h1>Hello, $username!</h1>";
+        $username = $_GET['username'];
+        echo "<h1>Hello, $username!</h1>";
     ?>
+
+    
 </body>
 </html>
