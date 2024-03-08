@@ -10,12 +10,13 @@
 </head>
 <body>
     <form action="index.php" method="POST">
-    <h2>Registration form for Book list.</h2>
-    Username: <br>
-    <input type="text" name="username"><br>
-    Password: <br>
-    <input type="password" name="password"><br>
-    <input type="submit" name="submit" value="Register">
+        <h2>Registration form for Book list.</h2>
+        Username: <br>
+        <input type="text" name="username"><br>
+        Password: <br>
+        <input type="password" name="password"><br>
+        <input type="submit" name="submit" value="Register"><br>
+        <a href="login.php">Already, have an account.</a>
     </form>
 </body>
 </html>
