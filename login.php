@@ -29,12 +29,12 @@
         } elseif(empty($password)){
             echo"Please enter a Password.";
         } else {
-            $sql = "SELECT * FROM user WHERE user_name = '$username'";
+            $sql = "SELECT * FROM user WHERE user_name = '$username' AND password = '$password'";
             
             try{
                 $result = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($result)>0){
-                    while($row =mysqli_fetch_assoc($result)){
+                    while($row = mysqli_fetch_assoc($result)){
                         header("Location: welcome.php?username=" . $username);
                         exit();
                     };
