@@ -57,6 +57,44 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .refresh-button {
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .refresh-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .book-list {
+            margin-top: 20px;
+        }
+
+        .book-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .error-message {
+            background-color: #ffcccc;
+            padding: 10px;
+            border-radius: 8px;
+            color: #cc0000;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -64,19 +102,22 @@
         $username = $_GET['username'];
         echo "<h1>Hello, $username!</h1>";
     ?>
-    <form action="welcome.php" method="post">
+    <form action="welcome.php?username=<?php echo htmlspecialchars($username); ?>" method="post">
         <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
         Book Name: <input type="text" name="book_name" id="book_name"><br>
         Author Name: <input type="text" name="author_name" id="author_name"><br>
         Book Link: <input type="text" name="book_link" id="book_link"><br>
         <input type="submit" value="Add Book" name="add_book" id="add_book">
     </form>
-    <form action="welcome.php" method="post">
+    <form action="welcome.php?username=<?php echo htmlspecialchars($username); ?>" method="post">
         <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
         Book ID: <input type="text" name="bookId" id="bookId"><br>
         <input type="submit" value="Delete Book" name="delete_book" id="delete_book"> 
     </form>
-
+    <button class="refresh-button" onclick="refreshBookList()">Refresh Book List</button>
+    </form>
+    <div id="bookListContainer"></div>
+<!--     
     <?php
         $sql = "SELECT * FROM book_list WHERE user_name = '$username'";
 
@@ -93,7 +134,22 @@
         } else {
             echo "Error Occured";
         }
-    ?>
+    ?> -->
+
+    <script>
+        function refreshBookList() {
+            // Perform an AJAX request to fetch the updated book list
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Update the content of the book list container
+                    document.getElementById("bookListContainer").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "get_book_list.php?username=<?php echo htmlspecialchars($username); ?>", true);
+            xhttp.send();
+        }
+    </script>
 </body>
 </html>
 
@@ -137,6 +193,8 @@
             } catch (mysqli_sql_exception){
                 echo"Book is not Deleted";
             }
+        } else {
+            // 
         }
     }
     mysqli_close($conn);
