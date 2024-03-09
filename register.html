@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+
+    <script>
+        function validateRegistrationForm() {
+            var username = document.getElementsByName('username')[0].value;
+            var password = document.getElementsByName('password')[0].value;
+
+            if (username.trim() === '' || password.trim() === '') {
+                alert('Both username and password are required.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form action="register.php" method="POST" onsubmit="return validateRegistrationForm()">
+        <h2>Registration form for Book list.</h2>
+        Username: <br>
+        <input type="text" name="username"><br>
+        Password: <br>
+        <input type="password" name="password"><br>
+        <input type="submit" name="submit" value="Register"><br>
+        <a href="index.html">Already have an account.</a>
+    </form>
+</body>
+</html>
