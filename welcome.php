@@ -117,7 +117,7 @@
     <button class="refresh-button" onclick="refreshBookList()">Refresh Book List</button>
     </form>
     <div id="bookListContainer"></div>
-<!--     
+    
     <?php
         $sql = "SELECT * FROM book_list WHERE user_name = '$username'";
 
@@ -134,7 +134,7 @@
         } else {
             echo "Error Occured";
         }
-    ?> -->
+    ?> 
 
     <script>
         function refreshBookList() {

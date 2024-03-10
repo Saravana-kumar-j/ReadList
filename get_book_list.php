@@ -7,12 +7,10 @@
     
     $username = $_GET['username'];
     
-    // Retrieve the book list
     $sql = "SELECT * FROM book_list WHERE user_name = '$username'";
     $result = mysqli_query($conn, $sql);
     
     if ($result) {
-        // Build and output the HTML for the book list
         echo '<div class="book-list">';
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<div class="book-item">';
@@ -26,8 +24,5 @@
     } else {
         echo "<div class='error-message'>Error Occurred</div>";
     }
-    
-    
-    // Close the database connection
     mysqli_close($conn);
 ?>
