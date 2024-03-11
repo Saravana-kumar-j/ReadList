@@ -117,24 +117,6 @@
     <button class="refresh-button" onclick="refreshBookList()">Refresh Book List</button>
     </form>
     <div id="bookListContainer"></div>
-    
-    <?php
-        $sql = "SELECT * FROM book_list WHERE user_name = '$username'";
-
-        $result = mysqli_query($conn, $sql);
-        
-        if ($result) {
-            // Fetch and display the book list
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "Book ID: " . $row['book_id'] . "<br>";
-                echo "Book Name: " . $row['book_name'] . "<br>";
-                echo "Author Name: " . $row['author_name'] . "<br>";
-                echo "Book Link: " . $row['book_link'] . "<br><br>";
-            }
-        } else {
-            echo "Error Occured";
-        }
-    ?> 
 
     <script>
         function refreshBookList() {
